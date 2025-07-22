@@ -5,6 +5,9 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
@@ -15,26 +18,39 @@ header {
 
 h1 {
     color: #9f7aea;
-    font-size: 1.8em;
+    font-size: 2em;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em 1em;
+    gap: 1em;
 }
 
 nav {
-    text-align: center;
-    margin-top: 1em;
     display: flex;
     flex-direction: column;
-    gap: 1em;
-    padding: 1em;
+    gap: 1.2em;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2em 1em;
 }
 
 nav a {
     display: block;
     background-color: #4caf50;
     color: white;
-    padding: 1em;
+    padding: 1.2em;
+    text-align: center;
     text-decoration: none;
-    border-radius: 8px;
-    font-size: 1.2em;
+    border-radius: 12px;
+    font-size: 1.4em;
+    font-weight: bold;
     transition: background-color 0.3s;
 }
 
@@ -43,19 +59,22 @@ nav a:hover {
 }
 
 section {
-    padding: 1.5em;
+    padding: 1em;
+    text-align: center;
 }
 
 button {
-    padding: 1em;
+    padding: 1.2em;
     background-color: #673ab7;
     color: white;
     border: none;
-    border-radius: 6px;
-    font-size: 1.1em;
+    border-radius: 10px;
+    font-size: 1.3em;
     cursor: pointer;
-    margin-top: 1em;
     width: 100%;
+    max-width: 400px;
+    margin: 1em auto 0 auto;
+    display: block;
 }
 
 button:hover {
@@ -64,31 +83,13 @@ button:hover {
 
 textarea {
     width: 100%;
-    font-size: 1em;
+    max-width: 100%;
+    font-size: 1.2em;
     padding: 1em;
-    border-radius: 6px;
+    border-radius: 8px;
     border: none;
     background-color: #2e2e3f;
     color: white;
     box-sizing: border-box;
-}
-
-@media (min-width: 768px) {
-    nav {
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    nav a {
-        width: auto;
-        margin: 0 0.5em;
-    }
-
-    section {
-        padding: 2em 4em;
-    }
-
-    button {
-        width: auto;
-    }
+    margin-top: 1em;
 }
