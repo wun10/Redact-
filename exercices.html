@@ -10,22 +10,92 @@
 <header>
     <h1>Exercices d'orthographe</h1>
 </header>
-<section>
-    <p>Choisis la bonne réponse :</p>
-    <p>1. Il (prend / prendt) son service à 8h.</p>
-    <button onclick="checkAnswer('prend')">prend</button>
-    <button onclick="checkAnswer('prendt')">prendt</button>
-    <p id="result"></p>
-</section>
+<main>
+    <section id="exercise-container">
+        <p id="question">1. Il (prend / prendt) son service à 8h.</p>
+        <div id="choices">
+            <button class="choice-btn" onclick="selectAnswer(this)">prend</button>
+            <button class="choice-btn" onclick="selectAnswer(this)">prendt</button>
+        </div>
+        <button id="submit-btn" onclick="checkAnswer()">Corriger</button>
+        <p id="feedback"></p>
+        <button id="next-btn" onclick="loadNextQuestion()" style="display: none;">Question suivante</button>
+    </section>
+</main>
+
 <script>
-function checkAnswer(answer) {
-    const result = document.getElementById('result');
-    if (answer === 'prend') {
-        result.textContent = "✅ Bonne réponse !";
-    } else {
-        result.textContent = "❌ Mauvaise réponse. Essaie encore.";
+const questions = [
+    {
+        question: "Il (prend / prendt) son service à 8h.",
+        choices: ["prend", "prendt"],
+        correct: "prend"
+    },
+    {
+        question: "Les gendarmes (est / sont) arrivés rapidement.",
+        choices: ["est", "sont"],
+        correct: "sont"
+    },
+    {
+        question: "Elle (va / vas) au travail tous les jours.",
+        choices: ["va", "vas"],
+        correct: "va"
     }
+];
+
+let currentQuestion = 0;
+let selectedAnswer = "";
+
+function loadNextQuestion() {
+    currentQuestion++;
+    if (currentQuestion >= questions.length) currentQuestion = 0;
+    displayQuestion();
 }
+
+function displayQuestion() {
+    const q = questions[currentQuestion];
+    document.getElementById("question").textContent = q.question;
+
+    const choicesContainer = document.getElementById("choices");
+    choicesContainer.innerHTML = "";
+    q.choices.forEach(choice => {
+        const btn = document.createElement("button");
+        btn.className = "choice-btn";
+        btn.textContent = choice;
+        btn.onclick = () => selectAnswer(btn);
+        choicesContainer.appendChild(btn);
+    });
+
+    document.getElementById("feedback").textContent = "";
+    document.getElementById("submit-btn").style.display = "block";
+    document.getElementById("next-btn").style.display = "none";
+    selectedAnswer = "";
+}
+
+function selectAnswer(button) {
+    const allButtons = document.querySelectorAll(".choice-btn");
+    allButtons.forEach(btn => btn.style.border = "none");
+    button.style.border = "3px solid #ffffff";
+    selectedAnswer = button.textContent;
+}
+
+function checkAnswer() {
+    const correctAnswer = questions[currentQuestion].correct;
+    const feedback = document.getElementById("feedback");
+    if (selectedAnswer === "") {
+        feedback.textContent = "❗ Sélectionnez une réponse avant de corriger.";
+        return;
+    }
+    if (selectedAnswer === correctAnswer) {
+        feedback.textContent = "✅ Bonne réponse !";
+    } else {
+        feedback.textContent = `❌ Mauvaise réponse. La bonne réponse était "${correctAnswer}".`;
+    }
+    document.getElementById("submit-btn").style.display = "none";
+    document.getElementById("next-btn").style.display = "block";
+}
+
+// Initialiser la première question
+displayQuestion();
 </script>
 </body>
 </html>
