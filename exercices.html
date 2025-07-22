@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercices - Redact+</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>Exercices d'orthographe</h1>
+</header>
+<section>
+    <p>Choisis la bonne réponse :</p>
+    <p>1. Il (prend / prendt) son service à 8h.</p>
+    <button onclick="checkAnswer('prend')">prend</button>
+    <button onclick="checkAnswer('prendt')">prendt</button>
+    <p id="result"></p>
+</section>
+<script>
+function checkAnswer(answer) {
+    const result = document.getElementById('result');
+    if (answer === 'prend') {
+        result.textContent = "✅ Bonne réponse !";
+    } else {
+        result.textContent = "❌ Mauvaise réponse. Essaie encore.";
+    }
+}
+</script>
+</body>
+</html>
